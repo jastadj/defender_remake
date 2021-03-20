@@ -2,12 +2,6 @@ extends Node2D
 
 var MTN_RANGE_CHUNK_WIDTH = 1000
 
-func _ready():
-	
-	#var gameseed = OS.get_unix_time()
-	#seed(gameseed)
-	pass
-	
 func _physics_process(delta):
 	
 	# adjust camera

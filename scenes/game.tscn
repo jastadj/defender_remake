@@ -6,10 +6,10 @@
 [node name="game" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="mountains" type="Node2D" parent="."]
+
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 536.725, 310.49 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-
-[node name="mountains" type="Node2D" parent="."]

@@ -19,6 +19,10 @@ config/name="defender_remake"
 run/main_scene="res://scenes/game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Gamedata="*res://gamedata.gd"
+
 [display]
 
 window/stretch/mode="viewport"
