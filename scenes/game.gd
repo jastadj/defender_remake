@@ -4,10 +4,9 @@ var MTN_RANGE_CHUNK_WIDTH = 1000
 
 func _ready():
 	
-	
-	#$Camera2D.position = viewport_rect/2
-	
-	add_mountain(-1)
+	#var gameseed = OS.get_unix_time()
+	#seed(gameseed)
+	pass
 	
 func _physics_process(delta):
 	
@@ -40,7 +39,7 @@ func add_mountain(x_chunk):
 	
 	var new_range = preload("res://mountain/mountain_range.tscn").instance()
 	
-	new_range.position = Vector2(x_chunk*MTN_RANGE_CHUNK_WIDTH, get_viewport_rect().size.y - 20)
-	new_range.create_range(MTN_RANGE_CHUNK_WIDTH)
+	new_range.position = Vector2(x_chunk*MTN_RANGE_CHUNK_WIDTH, get_viewport_rect().size.y - 80)
+	new_range.create_range(MTN_RANGE_CHUNK_WIDTH, x_chunk*MTN_RANGE_CHUNK_WIDTH)
 	$mountains.add_child(new_range)
 
