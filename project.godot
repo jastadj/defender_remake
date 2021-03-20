@@ -19,6 +19,11 @@ config/name="defender_remake"
 run/main_scene="res://scenes/game.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
 [input]
 
 ui_left={
