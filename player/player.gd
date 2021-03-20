@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 var SHIP_SPEED = Vector2(5000,5000)
 var MAX_ACCELERATION = Vector2(100,100)
-var MAX_VELOCITY = Vector2(1000,1000)
-var DECELERATION = 100
+var MAX_VELOCITY = Vector2(1000,500)
+var DECELERATION = Vector2(50,50)
 
 
 var velocity = Vector2()
@@ -33,13 +33,13 @@ func _physics_process(delta):
 	
 	# decel in axis that isn't being thrusted
 	if velocity.x != 0 and move_dir.x == 0:
-		var decel = abs(velocity.x) - DECELERATION
+		var decel = abs(velocity.x) - DECELERATION.x
 		if decel <= 0: velocity.x = 0
 		else:
 			if velocity.x < 0: decel = decel * -1
 			velocity.x = decel
 	if velocity.y != 0 and move_dir.y == 0:
-		var decel = abs(velocity.y) - DECELERATION
+		var decel = abs(velocity.y) - DECELERATION.y
 		if decel <= 0: velocity.y = 0
 		else:
 			if velocity.y < 0: decel = decel * -1

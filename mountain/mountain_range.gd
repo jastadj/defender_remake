@@ -8,6 +8,9 @@ func create_range(range_width, noise_x_pos):
 	var noise = OpenSimplexNoise.new()
 	
 	var alt_range = ( randi()%100 > 75)
+	var alt_segs = ( randi()%100 > 75)
+	
+	if alt_segs: segments = 20
 	
 	noise.seed = Gamedata.gameseed
 	#noise.octaves = 4
