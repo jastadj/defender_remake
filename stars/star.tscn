@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://stars/star01.png" type="Texture" id=1]
+[ext_resource path="res://stars/star.gd" type="Script" id=2]
 
-[node name="star" type="Sprite"]
+[node name="Sprite" type="Sprite"]
 texture = ExtResource( 1 )
+script = ExtResource( 2 )

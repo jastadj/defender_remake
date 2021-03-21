@@ -18,6 +18,7 @@ func create_range(range_width, noise_x_pos):
 	#noise.persistence = 0.8
 
 	var rangepoints = []
+	var polygonpoints = []
 	var seglen = range_width / segments
 	
 	for p in range(0, segments+1):
@@ -28,6 +29,11 @@ func create_range(range_width, noise_x_pos):
 			rangepoints.push_back( Vector2(p*seglen, -50 + noise_y*amplitude*2) )
 		else:
 			rangepoints.push_back( Vector2(p*seglen, noise_y*amplitude) )
+	
+	polygonpoints = rangepoints.duplicate()
+	polygonpoints.push_back(Vector2(rangepoints[segments].x, 200))
+	polygonpoints.push_back(Vector2(rangepoints[0].x, 200))
+	$Polygon2D.polygon = polygonpoints
 	
 	points = rangepoints
 

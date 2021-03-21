@@ -10,7 +10,7 @@ func _physics_process(delta):
 
 	# delete/add mountain range chunks as needed
 	update_mountains()
-		
+	
 
 func update_mountains():
 	
