@@ -7,7 +7,14 @@
 [node name="game" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="starfield2" parent="." instance=ExtResource( 3 )]
+layer = -2
+parallax_x_amount = 0.04
+max_stars = 25
+star_scale = 0.735
+
 [node name="starfield" parent="." instance=ExtResource( 3 )]
+max_stars = 25
 
 [node name="mountains" type="Node2D" parent="."]
 
