@@ -66,7 +66,7 @@ func shoot():
 	# if player sprite is flipped, shoot/spawn x-axis flip
 	if $Sprite.flip_h:
 		spawn_pos.x -= $gun_pos.position.x*2
-		new_projectile.vel.x *= -1
+		new_projectile.flip()
 	
 	new_projectile.position = spawn_pos
 	get_tree().root.get_node("game").add_child(new_projectile)

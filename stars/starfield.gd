@@ -26,8 +26,6 @@ func _physics_process(delta):
 	while $Area2D/stars.get_child_count() < max_stars:
 		add_star()
 	
-	print("camera_x:",camera.position.x * parallax_x_amount)
-	
 func add_star():
 	
 	var new_star = preload("res://stars/star.tscn").instance()
