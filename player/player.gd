@@ -3,11 +3,20 @@ extends KinematicBody2D
 var SHIP_SPEED = Vector2(5000,5000)
 var MAX_ACCELERATION = Vector2(100,100)
 var MAX_VELOCITY = Vector2(800,500)
-var DECELERATION = Vector2(50,50)
+var DECELERATION = Vector2(5,50)
 
 var velocity = Vector2()
 var acceleration = Vector2()
 
+var MAX_CAMERA_OFFSET = 250
+var CAMERA_PAN_SPEED = 800
+var camera_offset
+
+func _ready():
+	camera_offset = MAX_CAMERA_OFFSET
+	# force camera to start offset
+	update_camera(0,true)
+	
 func _physics_process(delta):
 	
 	var move_dir = Vector2()
@@ -60,9 +69,19 @@ func _input(event):
 	if event.is_action_pressed("ui_shoot"): shoot()
 	elif event.is_action_pressed("ui_cancel"): get_tree().quit()
 
-func update_camera(delta):
+func update_camera(delta, force_offset=false):
+	
+	var flip_mod = 1
+	if $Sprite.flip_h: flip_mod = -1
+	var step_amount = delta * CAMERA_PAN_SPEED * flip_mod
+	var target_offset = MAX_CAMERA_OFFSET * flip_mod
+	
+	if camera_offset == target_offset: step_amount = 0
+	elif camera_offset*flip_mod > target_offset*flip_mod: camera_offset = target_offset
+	else: camera_offset += step_amount
 	
 	$Camera2D.position.y = to_local(get_viewport_rect().size/2).y
+	$Camera2D.position.x = camera_offset
 
 func shoot():
 	

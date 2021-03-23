@@ -22,7 +22,7 @@ func _ready():
 	
 func _physics_process(delta):
 	
-	$Area2D/stars.position.x = camera.position.x * (-parallax_x_amount)
+	$Area2D/stars.position.x = camera.to_global(camera.position).x * (-parallax_x_amount)
 	
 	while $Area2D/stars.get_child_count() < max_stars:
 		add_star()
@@ -31,7 +31,7 @@ func add_star():
 	
 	var new_star = preload("res://stars/star.tscn").instance()
 	new_star.position = Vector2( randi()%int(view_size.x), randi()%int(view_size.y) )
-	new_star.position.x += (camera.position.x * parallax_x_amount)
+	new_star.position.x += (camera.to_global(camera.position).x * parallax_x_amount)
 	new_star.scale = Vector2(star_scale, star_scale)
 	stars.add_child(new_star)
 

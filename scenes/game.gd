@@ -2,6 +2,10 @@ extends Node2D
 
 var MTN_RANGE_CHUNK_WIDTH = 1000
 
+func _ready():
+	
+	$UI_LAYER/UI.set_line_color(Color(1,0,0))
+
 func _physics_process(delta):
 	
 	# delete/add mountain range chunks as needed
