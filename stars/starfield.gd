@@ -10,7 +10,7 @@ var stars
 
 func _ready():
 	
-	camera = get_tree().root.get_node("game/Camera2D")
+	camera = get_tree().root.get_node("game/player/Camera2D")
 	view_size = camera.get_viewport_rect().size
 	stars = $Area2D/stars
 	

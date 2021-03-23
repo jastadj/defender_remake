@@ -1,22 +1,16 @@
 extends Node2D
 
 var MTN_RANGE_CHUNK_WIDTH = 1000
-var CAMERA_OFFSET_X = 250
 
 func _physics_process(delta):
 	
-	# set camera position
-	$Camera2D.position.x = $player.position.x + CAMERA_OFFSET_X
-	$Camera2D.position.y = get_viewport_rect().size.y/2
-	
 	# delete/add mountain range chunks as needed
 	update_mountains()
-	
 
 func update_mountains():
 	
 	var expected_chunks = []
-	expected_chunks.push_back( floor($Camera2D.position.x / MTN_RANGE_CHUNK_WIDTH) )
+	expected_chunks.push_back( floor($player/Camera2D.to_global($player/Camera2D.position).x / MTN_RANGE_CHUNK_WIDTH) )
 	expected_chunks.push_back( expected_chunks[0]-1 )
 	expected_chunks.push_back( expected_chunks[0]+1 )
 	

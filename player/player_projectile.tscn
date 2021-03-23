@@ -6,21 +6,21 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 2.46631
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.711111, 1 )
 colors = PoolColorArray( 0.962963, 0.962963, 0.962963, 1, 0.0226822, 0.807182, 0.967773, 1, 0.00392157, 0.662745, 0.588235, 0.247059 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 gravity = Vector3( -10, 0, 0 )
 initial_velocity = 11.49
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.0
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 3 )
 
 [node name="player_projectile" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -38,4 +38,4 @@ speed_scale = 5.0
 explosiveness = 0.3
 randomness = 0.69
 local_coords = false
-process_material = SubResource( 2 )
+process_material = SubResource( 4 )

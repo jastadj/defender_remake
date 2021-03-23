@@ -5,7 +5,6 @@ var MAX_ACCELERATION = Vector2(100,100)
 var MAX_VELOCITY = Vector2(800,500)
 var DECELERATION = Vector2(50,50)
 
-
 var velocity = Vector2()
 var acceleration = Vector2()
 
@@ -52,11 +51,18 @@ func _physics_process(delta):
 	
 	if position.y < 0: position.y = 0
 	elif position.y >= viewport_size.y: position.y = viewport_size.y
+	
+	# set camera position
+	update_camera(delta)
 
 func _input(event):
 	
 	if event.is_action_pressed("ui_shoot"): shoot()
 	elif event.is_action_pressed("ui_cancel"): get_tree().quit()
+
+func update_camera(delta):
+	
+	$Camera2D.position.y = to_local(get_viewport_rect().size/2).y
 
 func shoot():
 	

@@ -20,6 +20,3 @@ max_stars = 25
 
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 536.725, 310.49 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
