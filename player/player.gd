@@ -92,6 +92,10 @@ func update_camera(delta):
 func shoot():
 	
 	var new_projectile = preload("res://player/player_projectile.tscn").instance()
+	var shoot_sound = preload("res://sounds/player_shoot_sound.tscn").instance()
+	
+	shoot_sound.play()
+	add_child(shoot_sound)
 	
 	# spawn the projectile at the gun position node
 	var spawn_pos = $gun_pos.global_position
