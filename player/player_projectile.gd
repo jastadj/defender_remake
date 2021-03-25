@@ -15,6 +15,8 @@ func _ready():
 	camera = player.get_node("Camera2D")
 	time_alive = OS.get_ticks_msec()
 	
+	$tracer/tracer_noise.material.set_shader_param("TextureUniform", Gamedata.tracer_noise)
+	
 func _physics_process(delta):
 	
 	# keep projectile velocity constantly relative to player velocity, not realistic
@@ -31,10 +33,12 @@ func _physics_process(delta):
 	if $tracer.scale.x > TRACER_MAX_SCALE:
 		$tracer.scale.x = TRACER_MAX_SCALE
 	$tracer.position.x = (-$tracer.scale.x*2)-2
+	$tracer.modulate = Gamedata.rotating_palette.color
 	
-	$tracer.self_modulate = Gamedata.rotating_palette.color
+	$tracer/tracer_noise.modulate.a = 1.0 - ( (OS.get_ticks_msec() - time_alive)/1000)
 
 func flip():
 	flipped = true
+	rotation_degrees = 180
 	#vel.x *= -1
 	#$Particles2D.rotation = PI

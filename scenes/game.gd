@@ -4,8 +4,8 @@ var MTN_RANGE_CHUNK_WIDTH = 1000
 
 func _ready():
 	
-	$UI_LAYER/UI.set_line_color(Color(1,0,0))
-
+	$UI_LAYER/UI.set_line_color(Color(0,0.5,0))
+	
 func _physics_process(delta):
 	
 	# delete/add mountain range chunks as needed
