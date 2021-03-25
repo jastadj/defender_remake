@@ -12,8 +12,12 @@ var flipped = false
 var MAX_CAMERA_OFFSET = 250
 var CAMERA_PAN_SPEED = 0.75
 
+var thrust_anim
+
 func _ready():
 	$Camera2D.position.x = MAX_CAMERA_OFFSET
+	thrust_anim = $thrust/AnimationPlayer
+	thrust_anim.play("no_thrust")
 	
 func _physics_process(delta):
 	
@@ -27,8 +31,14 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_right"): move_dir.x += 1
 	
 	# flip player sprite if moving left
-	if $Sprite.flip_h and move_dir.x > 0: $Sprite.flip_h = false
-	elif !$Sprite.flip_h and move_dir.x < 0: $Sprite.flip_h = true
+	if $Sprite.flip_h and move_dir.x > 0:
+		$Sprite.flip_h = false
+		$thrust.flip_h = false
+		$thrust.position.x = abs($thrust.position.x)
+	elif !$Sprite.flip_h and move_dir.x < 0:
+		$Sprite.flip_h = true
+		$thrust.flip_h = true
+		$thrust.position.x = abs($thrust.position.x)*-1
 	
 	# update acceleration
 	acceleration = move_dir * SHIP_SPEED * delta
@@ -53,6 +63,12 @@ func _physics_process(delta):
 		else:
 			if velocity.y < 0: decel = decel * -1
 			velocity.y = decel
+	
+	# play thrust animation if have thrust input, else play no thrust (invisible)
+	if move_dir.x != 0:
+		if thrust_anim.current_animation != "thrusting": thrust_anim.play("thrusting")
+	else:
+		thrust_anim.play("no_thrust")
 			
 	move_and_slide(velocity)
 	

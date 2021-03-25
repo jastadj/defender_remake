@@ -1,10 +1,55 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://player/player.png" type="Texture" id=2]
+[ext_resource path="res://raws/playerthrust.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26.0598, 4.96268 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "no_thrust"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "thrusting"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
 
 [node name="player" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -26,3 +71,13 @@ current = true
 [node name="projectiles" type="Node2D" parent="."]
 
 [node name="camera_tween" type="Tween" parent="."]
+
+[node name="thrust" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="thrust"]
+playback_speed = 20.0
+anims/no_thrust = SubResource( 2 )
+anims/thrusting = SubResource( 3 )
