@@ -22,3 +22,5 @@ position = Vector2( 29.1357, 2.99231 )
 current = true
 
 [node name="projectiles" type="Node2D" parent="."]
+
+[node name="camera_tween" type="Tween" parent="."]

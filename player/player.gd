@@ -8,14 +8,12 @@ var DECELERATION = Vector2(5,50)
 var velocity = Vector2()
 var acceleration = Vector2()
 
+var flipped = false
 var MAX_CAMERA_OFFSET = 250
-var CAMERA_PAN_SPEED = 800
-var camera_offset
+var CAMERA_PAN_SPEED = 0.75
 
 func _ready():
-	camera_offset = MAX_CAMERA_OFFSET
-	# force camera to start offset
-	update_camera(0,true)
+	$Camera2D.position.x = MAX_CAMERA_OFFSET
 	
 func _physics_process(delta):
 	
@@ -69,19 +67,27 @@ func _input(event):
 	if event.is_action_pressed("ui_shoot"): shoot()
 	elif event.is_action_pressed("ui_cancel"): get_tree().quit()
 
-func update_camera(delta, force_offset=false):
+func update_camera(delta):
+	var direction_changed = false
+	var global_y = to_local( Vector2(get_viewport().size.x, get_viewport().size.y/2) ).y
+	# has player flipped directions?
+	if !flipped and $Sprite.flip_h:
+		direction_changed = true
+		flipped = true
+	elif flipped and !$Sprite.flip_h:
+		direction_changed = true
+		flipped = false
 	
-	var flip_mod = 1
-	if $Sprite.flip_h: flip_mod = -1
-	var step_amount = delta * CAMERA_PAN_SPEED * flip_mod
-	var target_offset = MAX_CAMERA_OFFSET * flip_mod
+	$Camera2D.position.y = global_y
 	
-	if camera_offset == target_offset: step_amount = 0
-	elif camera_offset*flip_mod > target_offset*flip_mod: camera_offset = target_offset
-	else: camera_offset += step_amount
-	
-	$Camera2D.position.y = to_local(get_viewport_rect().size/2).y
-	$Camera2D.position.x = camera_offset
+	# if player changed directions, tween the camera across the screen
+	if direction_changed:
+		var dir_mod = 1
+		if flipped: dir_mod = -1
+		$camera_tween.interpolate_property($Camera2D, "position",
+			Vector2($Camera2D.position), Vector2(MAX_CAMERA_OFFSET*dir_mod, $Camera2D.position.y),
+			1*CAMERA_PAN_SPEED, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+		$camera_tween.start()
 
 func shoot():
 	
