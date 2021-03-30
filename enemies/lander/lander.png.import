@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/playerthrust.png-729884c7d4d5296a5f48582347995719.stex"
+path="res://.import/lander.png-75665f644ee3a35f02652ef4b7590604.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://raws/playerthrust.png"
-dest_files=[ "res://.import/playerthrust.png-729884c7d4d5296a5f48582347995719.stex" ]
+source_file="res://enemies/lander/lander.png"
+dest_files=[ "res://.import/lander.png-75665f644ee3a35f02652ef4b7590604.stex" ]
 
 [params]
 
